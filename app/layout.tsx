@@ -28,13 +28,14 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.className} antialiased`}>
         <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+  attribute="class"
+  defaultTheme="light"
+  forcedTheme="light"
+  enableSystem={false}
+  disableTransitionOnChange
+>
+  {children}
+</ThemeProvider>
       </body>
     </html>
   );
