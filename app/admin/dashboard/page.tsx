@@ -5,6 +5,7 @@ import { pendingCount } from "@/lib/data";
 import { AccountSummary } from "@/components/AccountSummary";
 import { RangeFilter } from "@/components/RangeFilter";
 import { Card, Flash } from "@/components/Shell";
+import { AdminMissedAlert } from "@/components/MissedAlert";
 
 export default async function AdminDashboard({ searchParams }: { searchParams: Promise<SP> }) {
   const sp = await searchParams;
@@ -18,9 +19,11 @@ export default async function AdminDashboard({ searchParams }: { searchParams: P
   const rows = (data ?? []) as any[];
   const sum = (k: string) => rows.reduce((a, r) => a + Number(r[k]), 0);
   const outstanding = sum("balance");
+  const { data: missed } = await supabase.rpc("missed_days");
 
   return (
     <>
+      <AdminMissedAlert rows={(missed ?? []) as any[]} />
       <Flash sp={sp} />
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-5">
         <Card label="Total sales (all time)" value={money(sum("total_sales"))} />

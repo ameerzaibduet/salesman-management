@@ -7,6 +7,7 @@ import { RangeFilter } from "@/components/RangeFilter";
 import { Ledger } from "@/components/Ledger";
 import { TransactionForm } from "@/components/TransactionForm";
 import { Card, Flash } from "@/components/Shell";
+import { AdminMissedAlert } from "@/components/MissedAlert";
 
 export default async function AccountPage({
   params,
@@ -22,6 +23,7 @@ export default async function AccountPage({
   if (!profile) notFound();
 
   const range = resolveRange(sp);
+  const { data: missed } = await supabase.rpc("missed_days", { p_salesman: id });
   const path = `/admin/accounts/${id}`;
   const [bal, pending, products] = await Promise.all([
     getBalance(supabase, id),
@@ -31,6 +33,7 @@ export default async function AccountPage({
 
   return (
     <>
+      <AdminMissedAlert rows={(missed ?? []) as any[]} salesmanId={id} />
       <Flash sp={sp} />
       <div className="rounded-xl border bg-white p-4">
         <h2 className="text-xl font-bold">{profile.full_name}</h2>
