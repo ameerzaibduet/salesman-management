@@ -4,6 +4,7 @@ import type { SP } from "@/lib/format";
 import { Flash } from "@/components/Shell";
 import { dayLabel, type MissedRow } from "@/components/MissedAlert";
 import { requestSkip } from "./actions";
+import { SubmitButton } from "@/components/SubmitButton";
 
 export default async function MissedPage({ searchParams }: { searchParams: Promise<SP> }) {
   const sp = await searchParams;
@@ -54,7 +55,7 @@ export default async function MissedPage({ searchParams }: { searchParams: Promi
                     <form action={requestSkip} className="flex gap-1">
                       <input type="hidden" name="date" value={r.missed_date} />
                       <input name="reason" required minLength={3} placeholder="Reason" className="w-32 rounded border p-1 sm:w-48" />
-                      <button className="rounded border px-2 py-1">Skip</button>
+                      <SubmitButton className="rounded border px-2 py-1">Skip</SubmitButton>
                     </form>
                   )}
                 </td>

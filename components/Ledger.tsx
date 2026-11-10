@@ -3,6 +3,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { PAGE_SIZE, TABLES, hrefWith, money, pageOf, type SP, type TxType } from "@/lib/format";
 import { deleteTransaction } from "@/app/actions/transactions";
 import { Badge } from "@/components/Shell";
+import { SubmitButton } from "@/components/SubmitButton";
 
 const PAGE_KEY: Record<TxType, string> = { sale: "sp", return: "rp", payment: "pp" };
 const TITLE: Record<TxType, string> = {
@@ -120,7 +121,7 @@ export async function Ledger({
                           <input type="hidden" name="type" value={type} />
                           <input type="hidden" name="id" value={r.id} />
                           <input type="hidden" name="back" value={path} />
-                          <button className="text-red-600">Delete</button>
+                          <SubmitButton className="text-red-600">Delete</SubmitButton>
                         </form>
                       </td>
                     )}

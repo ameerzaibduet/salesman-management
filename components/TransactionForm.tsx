@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { saveTransaction } from "@/app/actions/transactions";
+import { SubmitButton } from "@/components/SubmitButton";
 
 type Defaults = {
   date?: string;
@@ -107,9 +108,9 @@ export function TransactionForm({
       </label>
 
       <div className="sm:col-span-2">
-        <button className="rounded-lg bg-black px-4 py-2 text-white">
+        <SubmitButton className="rounded-lg bg-black px-4 py-2 text-white">
           {submitLabel ?? (salesmanId || id ? "Save" : "Submit for approval")}
-        </button>
+        </SubmitButton>
       </div>
     </form>
   );

@@ -3,6 +3,7 @@ import { requireRole } from "@/lib/session";
 import { money, today, type SP } from "@/lib/format";
 import { Card, Flash } from "@/components/Shell";
 import { addLedger, deleteLedger, setCost } from "./actions";
+import { SubmitButton } from "@/components/SubmitButton";
 
 const NAMES: Record<string, string> = { khan_zaib: "Khan Zaib", hafeez: "Hafeez" };
 
@@ -98,7 +99,7 @@ export default async function RainSuitsPage({ searchParams }: { searchParams: Pr
           </p>
           <label className="block text-sm">Cost (Rs.)<input name="cost" type="number" step="0.01" min="0" required className={input} /></label>
           <label className="block text-sm">Effective from<input name="effective_from" type="date" defaultValue={t} required className={input} /></label>
-          <button className="rounded-lg bg-black px-4 py-2 text-white">Save cost</button>
+          <SubmitButton className="rounded-lg bg-black px-4 py-2 text-white">Save cost</SubmitButton>
           {costRows.length > 0 && (
             <ul className="border-t pt-2 text-xs text-gray-600">
               {costRows.map((c) => (
@@ -120,7 +121,7 @@ export default async function RainSuitsPage({ searchParams }: { searchParams: Pr
           <label className="block text-sm">Amount (Rs.)<input name="amount" type="number" step="0.01" min="0.01" required className={input} /></label>
           <label className="block text-sm">Date<input name="entry_date" type="date" defaultValue={t} required className={input} /></label>
           <label className="block text-sm">Note<input name="note" className={input} /></label>
-          <button className="rounded-lg bg-black px-4 py-2 text-white">Save</button>
+          <SubmitButton className="rounded-lg bg-black px-4 py-2 text-white">Save</SubmitButton>
         </form>
 
         <form action={addLedger} className="space-y-3 rounded-xl border bg-white p-4">
@@ -129,7 +130,7 @@ export default async function RainSuitsPage({ searchParams }: { searchParams: Pr
           <label className="block text-sm">Amount (Rs.)<input name="amount" type="number" step="0.01" min="0.01" required className={input} /></label>
           <label className="block text-sm">Date<input name="entry_date" type="date" defaultValue={t} required className={input} /></label>
           <label className="block text-sm">What for<input name="note" className={input} /></label>
-          <button className="rounded-lg bg-black px-4 py-2 text-white">Save</button>
+          <SubmitButton className="rounded-lg bg-black px-4 py-2 text-white">Save</SubmitButton>
         </form>
       </div>
 
@@ -187,7 +188,7 @@ export default async function RainSuitsPage({ searchParams }: { searchParams: Pr
                 <td className="p-2 text-right">
                   <form action={deleteLedger}>
                     <input type="hidden" name="id" value={e.id} />
-                    <button className="text-red-600">Delete</button>
+                    <SubmitButton className="text-red-600">Delete</SubmitButton>
                   </form>
                 </td>
               </tr>

@@ -2,6 +2,7 @@ import { requireRole } from "@/lib/session";
 import type { SP } from "@/lib/format";
 import { Flash } from "@/components/Shell";
 import { addProduct, toggleProduct } from "./actions";
+import { SubmitButton } from "@/components/SubmitButton";
 
 export default async function ProductsPage({ searchParams }: { searchParams: Promise<SP> }) {
   const sp = await searchParams;
@@ -15,7 +16,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
       </p>
       <form action={addProduct} className="flex gap-2 rounded-xl border bg-white p-4">
         <input name="name" required placeholder="Product name" className="flex-1 rounded-lg border p-2" />
-        <button className="rounded-lg bg-black px-4 py-2 text-white">Add</button>
+        <SubmitButton className="rounded-lg bg-black px-4 py-2 text-white">Add</SubmitButton>
       </form>
       <section className="rounded-xl border bg-white">
         {(data ?? []).map((p: any) => (
@@ -23,7 +24,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
             <span className={p.is_active ? "" : "text-gray-400 line-through"}>{p.name}</span>
             <input type="hidden" name="id" value={p.id} />
             <input type="hidden" name="active" value={String(!p.is_active)} />
-            <button className="rounded border px-2 py-1 text-sm">{p.is_active ? "Hide" : "Show"}</button>
+            <SubmitButton className="rounded border px-2 py-1 text-sm">{p.is_active ? "Hide" : "Show"}</SubmitButton>
           </form>
         ))}
       </section>

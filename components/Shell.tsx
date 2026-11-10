@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { logout } from "@/app/login/actions";
+import { SubmitButton } from "@/components/SubmitButton";
 
 export function Shell({
   title,
@@ -20,7 +21,7 @@ export function Shell({
           <div className="flex items-center gap-3 text-sm">
             <span className="text-gray-600">{name}</span>
             <form action={logout}>
-              <button className="rounded border px-3 py-1 hover:bg-gray-100">Logout</button>
+              <SubmitButton className="rounded border px-3 py-1 hover:bg-gray-100">Logout</SubmitButton>
             </form>
           </div>
         </div>

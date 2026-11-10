@@ -3,6 +3,7 @@ import { today, type SP } from "@/lib/format";
 import { Flash } from "@/components/Shell";
 import { dayLabel } from "@/components/MissedAlert";
 import { addIgnoredDay, removeIgnoredDay, saveWeekdays } from "./actions";
+import { SubmitButton } from "@/components/SubmitButton";
 
 const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
@@ -31,14 +32,14 @@ export default async function OffDaysPage({ searchParams }: { searchParams: Prom
             </label>
           ))}
         </div>
-        <button className="rounded-lg bg-black px-4 py-2 text-white">Save</button>
+        <SubmitButton className="rounded-lg bg-black px-4 py-2 text-white">Save</SubmitButton>
       </form>
 
       <form action={addIgnoredDay} className="grid gap-3 rounded-xl border bg-white p-4 sm:grid-cols-3">
         <h3 className="font-semibold sm:col-span-3">Ignore a specific date (holiday, Eid, etc.)</h3>
         <label className="text-sm">Date<input type="date" name="day" defaultValue={today()} required className={input} /></label>
         <label className="text-sm sm:col-span-2">Note (optional)<input name="note" className={input} /></label>
-        <div className="sm:col-span-3"><button className="rounded-lg bg-black px-4 py-2 text-white">Ignore this day</button></div>
+        <div className="sm:col-span-3"><SubmitButton className="rounded-lg bg-black px-4 py-2 text-white">Ignore this day</SubmitButton></div>
       </form>
 
       <section className="rounded-xl border bg-white">
@@ -48,7 +49,7 @@ export default async function OffDaysPage({ searchParams }: { searchParams: Prom
           <form key={r.day} action={removeIgnoredDay} className="flex items-center justify-between border-b p-3 text-sm last:border-0">
             <span>{dayLabel(r.day)}{r.note ? ` — ${r.note}` : ""}</span>
             <input type="hidden" name="day" value={r.day} />
-            <button className="text-red-600">Remove</button>
+            <SubmitButton className="text-red-600">Remove</SubmitButton>
           </form>
         ))}
       </section>

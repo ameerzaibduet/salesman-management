@@ -4,6 +4,7 @@ import { one, today, type SP } from "@/lib/format";
 import { Flash } from "@/components/Shell";
 import { dayLabel, isOpen, type MissedRow } from "@/components/MissedAlert";
 import { ignoreDay, ignoreRange, reviewSkip, undoSkip } from "./actions";
+import { SubmitButton } from "@/components/SubmitButton";
 
 export default async function AdminMissedPage({ searchParams }: { searchParams: Promise<SP> }) {
   const sp = await searchParams;
@@ -72,7 +73,7 @@ export default async function AdminMissedPage({ searchParams }: { searchParams: 
                       <input type="hidden" name="date" value={r.missed_date} />
                       <input type="hidden" name="reason" value={r.skip_reason ?? ""} />
                       <input type="hidden" name="back" value={back} />
-                      <button className="rounded bg-green-600 px-3 py-1 text-white">Approve</button>
+                      <SubmitButton className="rounded bg-green-600 px-3 py-1 text-white">Approve</SubmitButton>
                     </form>
                     <RejectForm salesmanId={r.salesman_id} date={r.missed_date} back={back} />
                   </td>
@@ -95,7 +96,7 @@ export default async function AdminMissedPage({ searchParams }: { searchParams: 
         <label className="text-sm">From<input type="date" name="from" defaultValue={t} required className={input} /></label>
         <label className="text-sm">To<input type="date" name="to" defaultValue={t} required className={input} /></label>
         <label className="text-sm">Reason (optional)<input name="reason" className={input} /></label>
-        <div className="sm:col-span-4"><button className="rounded-lg bg-black px-4 py-2 text-white">Ignore these days</button></div>
+        <div className="sm:col-span-4"><SubmitButton className="rounded-lg bg-black px-4 py-2 text-white">Ignore these days</SubmitButton></div>
       </form>
 
       {list.length === 0 && (
@@ -120,13 +121,13 @@ export default async function AdminMissedPage({ searchParams }: { searchParams: 
                     <input type="hidden" name="salesman_id" value={id} />
                     <input type="hidden" name="date" value={r.missed_date} />
                     <input type="hidden" name="back" value={back} />
-                    <button
+                    <SubmitButton
                       title="Ignore this day for this salesman"
                       className="rounded-full bg-red-50 px-3 py-1 text-red-700 hover:bg-red-100"
                     >
                       {dayLabel(r.missed_date)} ✕
                       {r.skip_status === "rejected" ? " (skip rejected)" : ""}
-                    </button>
+                    </SubmitButton>
                   </form>
                 </li>
               ))}
@@ -151,7 +152,7 @@ export default async function AdminMissedPage({ searchParams }: { searchParams: 
                   <form action={undoSkip}>
                     <input type="hidden" name="id" value={r.id} />
                     <input type="hidden" name="back" value={back} />
-                    <button className="text-red-600">Undo</button>
+                    <SubmitButton className="text-red-600">Undo</SubmitButton>
                   </form>
                 </td>
               </tr>
@@ -170,7 +171,7 @@ function RejectForm({ salesmanId, date, back }: { salesmanId: string; date: stri
       <input type="hidden" name="decision" value="rejected" />
       <input type="hidden" name="back" value={back} />
       <input name="reason" required placeholder="Reason" className="w-28 rounded border p-1" />
-      <button className="rounded bg-red-600 px-3 py-1 text-white">Reject</button>
+      <SubmitButton className="rounded bg-red-600 px-3 py-1 text-white">Reject</SubmitButton>
     </form>
   );
 }

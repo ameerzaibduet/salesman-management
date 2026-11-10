@@ -4,6 +4,7 @@ import { TABLES, isTxType, money, one, type SP, type TxType } from "@/lib/format
 import { pendingCount } from "@/lib/data";
 import { reviewTransaction } from "@/app/actions/transactions";
 import { Flash } from "@/components/Shell";
+import { SubmitButton } from "@/components/SubmitButton";
 
 const TABS: { type: TxType; label: string }[] = [
   { type: "sale", label: "Products Taken" },
@@ -85,7 +86,7 @@ export default async function Approvals({ searchParams }: { searchParams: Promis
                     <input type="hidden" name="id" value={r.id} />
                     <input type="hidden" name="decision" value="approved" />
                     <input type="hidden" name="back" value={`${back}?tab=${type}`} />
-                    <button className="rounded bg-green-600 px-3 py-1 text-white">Approve</button>
+                    <SubmitButton className="rounded bg-green-600 px-3 py-1 text-white">Approve</SubmitButton>
                   </form>
                   <form action={reviewTransaction} className="flex gap-1">
                     <input type="hidden" name="type" value={type} />
@@ -93,7 +94,7 @@ export default async function Approvals({ searchParams }: { searchParams: Promis
                     <input type="hidden" name="decision" value="rejected" />
                     <input type="hidden" name="back" value={`${back}?tab=${type}`} />
                     <input name="reason" required placeholder="Reason" className="w-32 rounded border p-1" />
-                    <button className="rounded bg-red-600 px-3 py-1 text-white">Reject</button>
+                    <SubmitButton className="rounded bg-red-600 px-3 py-1 text-white">Reject</SubmitButton>
                   </form>
                 </td>
               </tr>

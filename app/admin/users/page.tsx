@@ -3,6 +3,7 @@ import { requireRole } from "@/lib/session";
 import type { SP } from "@/lib/format";
 import { Flash } from "@/components/Shell";
 import { createSalesman, resetPassword, setActive } from "./actions";
+import { SubmitButton } from "@/components/SubmitButton";
 
 export default async function UsersPage({ searchParams }: { searchParams: Promise<SP> }) {
   const sp = await searchParams;
@@ -23,7 +24,7 @@ export default async function UsersPage({ searchParams }: { searchParams: Promis
         <label className="text-sm">Password (min 10 chars)<input name="password" type="text" minLength={10} required className={input} /></label>
         <label className="text-sm">Address<input name="address" className={input} /></label>
         <div className="sm:col-span-2">
-          <button className="rounded-lg bg-black px-4 py-2 text-white">Create account</button>
+          <SubmitButton className="rounded-lg bg-black px-4 py-2 text-white">Create account</SubmitButton>
         </div>
       </form>
 
@@ -52,12 +53,12 @@ export default async function UsersPage({ searchParams }: { searchParams: Promis
                   <form action={setActive}>
                     <input type="hidden" name="id" value={u.id} />
                     <input type="hidden" name="active" value={String(!u.is_active)} />
-                    <button className="rounded border px-2 py-1">{u.is_active ? "Disable" : "Enable"}</button>
+                    <SubmitButton className="rounded border px-2 py-1">{u.is_active ? "Disable" : "Enable"}</SubmitButton>
                   </form>
                   <form action={resetPassword} className="flex gap-1">
                     <input type="hidden" name="id" value={u.id} />
                     <input name="password" type="text" minLength={10} required placeholder="New password" className="w-36 rounded border p-1" />
-                    <button className="rounded border px-2 py-1">Reset</button>
+                    <SubmitButton className="rounded border px-2 py-1">Reset</SubmitButton>
                   </form>
                 </td>
               </tr>
